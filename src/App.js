@@ -5,7 +5,7 @@ import Homepage from './Pages/Homepage';
 import CoinPage from './Pages/CoinPage';
 import { makeStyles } from '@material-ui/core';
 
-const App = () => {
+const App = () => { 
   const useStyles = makeStyles(() => ({
     App: {
       background: '#14161a',

@@ -199,14 +199,14 @@ const CoinsTable = () => {
         </TableContainer>
 
         <Pagination
+          count={(handleSearch()?.length / 10).toFixed(0)}
           style={{
             padding: 20,
-            width: '100%',
-            display: 'flex',
-            justifyContent: 'center',
+            width: "100%",
+            display: "flex",
+            justifyContent: "center",
           }}
           classes={{ ul: classes.pagination }}
-          count={(handleSearch()?.length / 10).toFixed(0)}
           onChange={(_, value) => {
             setPage(value);
             window.scroll(0, 450);
