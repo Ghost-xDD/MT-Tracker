@@ -1,7 +1,7 @@
-import { Typography } from '@material-ui/core';
+import { Typography, LinearProgress } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core';
-import parse from 'html-react-parser';
-import { display } from '@mui/system';
+// import parse from 'html-react-parser';
+// import { display } from '@mui/system';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
@@ -22,7 +22,7 @@ const CoinPage = () => {
     setCoin(data);
   };
 
-  console.log(coin);
+  // console.log(coin);
 
   useEffect(() => {
     fetchCoin();
@@ -60,9 +60,29 @@ const CoinPage = () => {
       paddingTop: 0,
       textAlign: 'justify',
     },
+    marketData: {
+      alignSelf: 'start',
+      padding: 25,
+      paddingTop: 10,
+      width: '100%',
+      // making it responsive
+      [theme.breakpoints.down('md')]: {
+        display: 'flex',
+        justifyContent: 'space-around',
+      },
+      [theme.breakpoints.down('sm')]: {
+        flexDirection: 'column',
+        alignItems: 'center',
+      },
+      [theme.breakpoints.down('xs')]: {
+        alignItems: 'start',
+      },
+    },
   }));
 
   const classes = useStyles();
+
+  if (!coin) return <LinearProgress style={{ backgroundColor: 'blue' }} />;
 
   return (
     <div className={classes.container}>
@@ -99,7 +119,7 @@ const CoinPage = () => {
             <Typography variant="h5" style={{ fontFamily: 'Manrope' }}>
               {symbol}
               {''}
-              {/* Bug */}
+              {/* Bug : toString() error fixed by LinearProgress */}
               {numberWithCommas(
                 coin?.market_data.current_price[currency.toLowerCase()]
               )}
@@ -108,11 +128,17 @@ const CoinPage = () => {
 
           <span style={{ display: 'flex' }}>
             <Typography variant="h5" className={classes.heading}>
-              Market Cap:
+              Market Cap: {''}
             </Typography>
             &nbsp; &nbsp;
             <Typography variant="h5" style={{ fontFamily: 'Manrope' }}>
-              {coin?.market_cap_rank}
+              {symbol}
+              {''}
+              {numberWithCommas(
+                coin?.market_data.market_cap[currency.toLowerCase()]
+                  .toString()
+                  .slice(0, -6)
+              )}
             </Typography>
           </span>
         </div>
