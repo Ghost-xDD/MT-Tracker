@@ -145,9 +145,8 @@ const CoinPage = () => {
       </div>
 
       {/* chart */}
-      <div>
-        <CoinInfo coin={coin} />
-      </div>
+
+      <CoinInfo coin={coin} />
     </div>
   );
 };

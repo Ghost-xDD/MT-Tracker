@@ -13,7 +13,7 @@ const CoinInfo = ({ coin }) => {
   const { currency } = CryptoState();
 
   const fetchHistoricData = async () => {
-    const { data } = await axios.get(HistoricalChart(coin.id, days));
+    const { data } = await axios.get(HistoricalChart(coin.id, days, currency));
 
     setHistoricData(data.prices);
   };
@@ -21,7 +21,7 @@ const CoinInfo = ({ coin }) => {
   useEffect(() => {
     fetchHistoricData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [days]); //whenever the currency or days change
+  }, [currency, days]); //whenever the currency or days change
 
   const darkTheme = createTheme({
     palette: {
@@ -75,11 +75,11 @@ const CoinInfo = ({ coin }) => {
                   return days === 1 ? time : date.toLocaleDateString();
                 }),
 
-                datasets: [
-                  {
-                    data: historicData.map((coin) => coin[1]),
-                  },
-                ],
+                // datasets: [
+                //   {
+                //     data: historicData.map((coin) => coin[1]),
+                //   },
+                // ],
               }}
             />
           </>
