@@ -1,6 +1,5 @@
 import React from 'react';
 import { Container, makeStyles, Typography } from '@material-ui/core';
-import { fontWeight } from '@mui/system';
 import Carousel from './Carousel';
 
 const useStyles = makeStyles(() => ({
