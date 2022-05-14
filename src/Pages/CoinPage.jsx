@@ -9,6 +9,7 @@ import { CryptoState } from '../AppContext';
 import CoinInfo from '../components/CoinInfo';
 import { SingleCoin } from '../config/api';
 import { numberWithCommas } from '../components/Hero/Carousel';
+import ReactHtmlParser from 'react-html-parser';
 
 const CoinPage = () => {
   const { id } = useParams();
@@ -97,7 +98,7 @@ const CoinPage = () => {
           {coin?.name}
         </Typography>
         <Typography variant="subtitle1" className={classes.description}>
-          {coin?.description.en.split('. ')[0]}.
+          {ReactHtmlParser(coin?.description.en.split('. ')[0])}.
         </Typography>
 
         <div className={classes.marketData}>
